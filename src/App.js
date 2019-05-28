@@ -4,11 +4,12 @@ import './App.css';
 
 function TodoList(props) {
   const todos = props.todos.map(todo => {
-    console.log(todo.id);
+
     return (
       <li key="{todo.id}">
         <ul>
           <li>{todo.id}</li>
+
           <li>{todo.content}</li>
           <li>{todo.color}</li>
         </ul>
@@ -16,7 +17,7 @@ function TodoList(props) {
     );
   });
   return (
-    <ul>
+    <ul className='todolists'>
       {todos}
     </ul>
   );

@@ -14,4 +14,9 @@ code {
 
 .todolists li{
  list-style: none;
+ 
+}
+
+.todolists{
+  background-color: rgba(255,255,255,0.2);
 }

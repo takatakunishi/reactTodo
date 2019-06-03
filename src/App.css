@@ -21,8 +21,10 @@
 
 
 body{
+  background-color: #282c34;
   font-size: 16px;
   font-family: Verdana, sans-serif;
+  color: #61dafb
 }
 
 .container{

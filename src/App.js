@@ -57,6 +57,12 @@ import './App.css';
 
 const todos = [];
 
+const mark = [
+  'ab',
+  'st',
+  'kj'
+];
+
 function TodoHeader(props) {
   const remaining = props.todos.filter(todo => {
     return !todo.isDone;
@@ -79,6 +85,7 @@ function TodoItem(props) {
         <span className={props.todo.isDone ? 'done' : ''}>
           {props.todo.title}
         </span>
+        <div>{props.todo.importance}</div>
       </label>
       <span className="cmd" onClick={() => props.deleteTodo(props.todo)}>[x]</span>
     </li>
@@ -106,7 +113,8 @@ function TodoList(props) {
 function TodoForm(props) {
   return (
     <form onSubmit={props.addTodo}>
-      <input type="text" value={props.item} onChange={props.updateItem} />
+      <input type="text" name="titleName" value={props.item} onChange={props.updateItem} />
+      <input type="radio" name="importance" value={props.importaance} onChange={props.updateItem} />重要
       <input type="submit" value="Add" />
     </form>
   );
@@ -121,7 +129,8 @@ class App extends React.Component {
     super();
     this.state = {
       todos: todos,
-      item: ''
+      item: '',
+      importaance: ''
     };
     this.checkTodo = this.checkTodo.bind(this);
     this.deleteTodo = this.deleteTodo.bind(this);
@@ -154,14 +163,20 @@ class App extends React.Component {
     const item = {
       id: getUniqueId(),
       title: this.state.item,
-      isDone: false
+      isDone: false,
     };
+
+    const importance = this.state.importance;
+
+
 
     const todos = this.state.todos.slice();
     todos.push(item);
+    todos.push(importance);
     this.setState({
       todos: todos,
-      item: ''
+      item: '',
+      importance: ''
     });
   }
 
@@ -195,9 +210,18 @@ class App extends React.Component {
   }
 
   updateItem(e) {
-    this.setState({
-      item: e.target.value
-    });
+    switch (e.target.name) {
+      case 'titleName':
+        this.setState({
+          item: e.target.value
+        });
+        break;
+      case '':
+        this.setState({
+          importance: e.target.value
+        });
+        break;
+    }
   }
 
   componentDidUpdate() {
@@ -225,6 +249,7 @@ class App extends React.Component {
         />
         <TodoForm
           item={this.state.item}
+          importance={this.state.importance}
           updateItem={this.updateItem}
           addTodo={this.addTodo}
         />

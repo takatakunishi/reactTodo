@@ -54,24 +54,21 @@ import './App.css';
 //   }
 //}
 
-
 const todos = [];
-
-const mark = [
-  'ab',
-  'st',
-  'kj'
-];
 
 function TodoHeader(props) {
   const remaining = props.todos.filter(todo => {
     return !todo.isDone;
   });
+  const importance = props.todos.filter(todo => {
+    return todo.isImp === 'important!';
+  });
   return (
     <h1>
       <button onClick={props.purge}>Purge</button>
       My Todos
-            <span>({remaining.length}/{props.todos.length})</span>
+      <span>({remaining.length}/{props.todos.length})</span>
+      <div className="NImportant">{importance.length}</div>
     </h1>
   );
 }
@@ -85,7 +82,6 @@ function TodoItem(props) {
         <span className={props.todo.isDone ? 'done' : ''}>
           {props.todo.title}
         </span>
-        <div>{props.todo.importance}</div>
       </label>
       <span className="cmd" onClick={() => props.deleteTodo(props.todo)}>[x]</span>
     </li>
@@ -114,7 +110,7 @@ function TodoForm(props) {
   return (
     <form onSubmit={props.addTodo}>
       <input type="text" name="titleName" value={props.item} onChange={props.updateItem} />
-      <input type="radio" name="importance" value={props.importaance} onChange={props.updateItem} />重要
+      <input type="checkbox" name="TF" value='important!' onChange={props.updateItem} />
       <input type="submit" value="Add" />
     </form>
   );
@@ -129,8 +125,7 @@ class App extends React.Component {
     super();
     this.state = {
       todos: todos,
-      item: '',
-      importaance: ''
+      item: ''
     };
     this.checkTodo = this.checkTodo.bind(this);
     this.deleteTodo = this.deleteTodo.bind(this);
@@ -164,19 +159,15 @@ class App extends React.Component {
       id: getUniqueId(),
       title: this.state.item,
       isDone: false,
+      isImp: this.state.isImp
     };
-
-    const importance = this.state.importance;
-
-
 
     const todos = this.state.todos.slice();
     todos.push(item);
-    todos.push(importance);
     this.setState({
       todos: todos,
       item: '',
-      importance: ''
+      isImp: ''
     });
   }
 
@@ -210,16 +201,21 @@ class App extends React.Component {
   }
 
   updateItem(e) {
-    switch (e.target.name) {
+    const data = e.target.name;
+
+    switch (data) {
       case 'titleName':
         this.setState({
           item: e.target.value
         });
         break;
-      case '':
+      case 'TF':
         this.setState({
-          importance: e.target.value
+          isImp: e.target.value
         });
+        break;
+      default:
+        console.log('unexpected is done!');
         break;
     }
   }
@@ -249,14 +245,13 @@ class App extends React.Component {
         />
         <TodoForm
           item={this.state.item}
-          importance={this.state.importance}
           updateItem={this.updateItem}
           addTodo={this.addTodo}
+          isImp={this.state.isImp}
         />
       </div>
     );
   }
 }
-
 
 export default App;

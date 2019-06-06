@@ -1,6 +1,7 @@
 import React from 'react';
 import logo, { ReactComponent } from './logo.svg';
 import './App.css';
+import TimeNow from './TimeNow.js'
 
 // function TodoList(props) {
 //   const todos = props.todos.map(todo => {
@@ -61,7 +62,7 @@ function TodoHeader(props) {
     return !todo.isDone;
   });
   const importance = props.todos.filter(todo => {
-    return todo.isImp == true;
+    return todo.isImp === true;
   });
   return (
     <h1>
@@ -257,6 +258,7 @@ class App extends React.Component {
           addTodo={this.addTodo}
           isImp={this.state.isImp}
         />
+        <TimeNow />
       </div>
     );
   }

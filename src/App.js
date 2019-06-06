@@ -61,14 +61,14 @@ function TodoHeader(props) {
     return !todo.isDone;
   });
   const importance = props.todos.filter(todo => {
-    return todo.isImp === 'important!';
+    return todo.isImp == true;
   });
   return (
     <h1>
       <button onClick={props.purge}>Purge</button>
       My Todos
       <span>({remaining.length}/{props.todos.length})</span>
-      <div className="NImportant">{importance.length}</div>
+      <div className="NImportant">Important Task:{importance.length}</div>
     </h1>
   );
 }
@@ -110,7 +110,7 @@ function TodoForm(props) {
   return (
     <form onSubmit={props.addTodo}>
       <input type="text" name="titleName" value={props.item} onChange={props.updateItem} />
-      <input type="checkbox" name="TF" value='important!' onChange={props.updateItem} />
+      <input type="checkbox" name="TF" value='important!' onChange={props.updateItem} checked={props.isImp} />
       <input type="submit" value="Add" />
     </form>
   );
@@ -125,7 +125,8 @@ class App extends React.Component {
     super();
     this.state = {
       todos: todos,
-      item: ''
+      item: '',
+      isImp: false
     };
     this.checkTodo = this.checkTodo.bind(this);
     this.deleteTodo = this.deleteTodo.bind(this);
@@ -154,7 +155,7 @@ class App extends React.Component {
     if (this.state.item.trim() === '') {
       return;
     }
-
+    console.log('add' + this.state.isImp);
     const item = {
       id: getUniqueId(),
       title: this.state.item,
@@ -167,7 +168,7 @@ class App extends React.Component {
     this.setState({
       todos: todos,
       item: '',
-      isImp: ''
+      isImp: false
     });
   }
 
@@ -187,7 +188,13 @@ class App extends React.Component {
 
   checkTodo(todo) {
     const todos = this.state.todos.map(todo => {
-      return { id: todo.id, title: todo.title, isDone: todo.isDone };
+      console.log('check' + todo.isImp);
+      return {
+        id: todo.id,
+        title: todo.title,
+        isDone: todo.isDone,
+        isImp: todo.isImp
+      };
     });
 
     const pos = this.state.todos.map(todo => {
@@ -210,8 +217,9 @@ class App extends React.Component {
         });
         break;
       case 'TF':
+        console.log('up' + e.target.checked);
         this.setState({
-          isImp: e.target.value
+          isImp: e.target.checked
         });
         break;
       default:

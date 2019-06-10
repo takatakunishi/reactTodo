@@ -121,6 +121,14 @@ h1 > button{
 }
 
 
+
+.formTitle2{
+  color: red;
+  margin: 10px 0 10px;
+  display: inline-block;
+}
+
+
 .App-link {
   color: #61dafb;
 }

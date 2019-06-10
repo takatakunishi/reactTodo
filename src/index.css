@@ -29,7 +29,7 @@ code {
 .timeContainer{
   display: inline-block;
   text-align: center;
-  font-size: 30px;
+  font-size: 40px;
   border: 2px solid white;
   border-radius: 5px;
   box-shadow: 5px 5px 2px rgba(255,255,255,0.2);

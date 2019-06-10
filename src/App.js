@@ -117,10 +117,13 @@ function TodoList(props) {
 
 function TodoForm(props) {
   return (
-    <form onSubmit={props.addTodo}>
-      <input type="text" name="titleName" value={props.item} onChange={props.updateItem} />
-      <input type="checkbox" name="TF" value='important!' onChange={props.updateItem} checked={props.isImp} />
-      <input type="submit" value="Add" />
+    <form className='formContainer' onSubmit={props.addTodo}>
+      <input className='formTitle' type="text" name="titleName" value={props.item} onChange={props.updateItem} />
+      <br />
+      <label className='formTitle2'>importance <input type="checkbox" name="TF" value='important!' onChange={props.updateItem} checked={props.isImp} />
+      </label>
+      <br />
+      <input className='formTitle' type="submit" value="Add" />
     </form>
   );
 }

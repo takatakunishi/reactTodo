@@ -65,21 +65,29 @@ function TodoHeader(props) {
     return todo.isImp === true;
   });
   return (
-    <h1>
-      <button onClick={props.purge}>Purge</button>
-      My Todos
-      <span>({remaining.length}/{props.todos.length})</span>
+    <div>
+      <div className='headerTitleContainer'>
+        <div className='headerTitleCover'>
+          <p className='headerTitle'>
+            My Todos
+            <span className='todoNumbers'> ({remaining.length}/{props.todos.length})</span>
+            <button onClick={props.purge}>Purge</button>
+          </p>
+        </div>
+      </div>
       <div className="NImportant">Important Task:{importance.length}</div>
-    </h1>
+    </div>
   );
 }
 
 function TodoItem(props) {
   return (
-    <li>
-      <label>
+    <li >
+      <label className="todoContents">
         <input type="checkbox" checked={props.todo.isDone}
           onChange={() => props.checkTodo(props.todo)} />
+        <p className={props.todo.isImp ? 'important' : 'notImportant'}>important!</p>
+
         <span className={props.todo.isDone ? 'done' : ''}>
           {props.todo.title}
         </span>
@@ -243,10 +251,13 @@ class App extends React.Component {
   render() {
     return (
       <div className="container">
-        <TodoHeader
-          todos={this.state.todos}
-          purge={this.purge}
-        />
+        <div className="headContainer">
+          <TodoHeader
+            todos={this.state.todos}
+            purge={this.purge}
+          />
+        </div>
+
         <TodoList
           todos={this.state.todos}
           checkTodo={this.checkTodo}
@@ -258,7 +269,6 @@ class App extends React.Component {
           addTodo={this.addTodo}
           isImp={this.state.isImp}
         />
-        <TimeNow />
       </div>
     );
   }

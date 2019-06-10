@@ -28,23 +28,64 @@ body{
 }
 
 .container{
-  width:300px;
+  width:80%;
   margin: auto;
 }
 
+.headContainer .headerTitleContainer{
+  flex-direction: row;
+  padding: 5px 5px 5px;
+}
+
+.container .headContainer{
+  padding: 5px; 
+  border-radius: 5px;
+  background: rgba(0,0,0,0.4);
+}
+
+.container .headContainer .headerTitleCover{
+  text-align: center;
+}
+
+.container .headContainer .headerTitle{
+  font-size: 32px;
+  margin-top: 0;
+  margin-bottom: 8px; 
+  display: inline-block;
+}
+
+.container .headContainer .headerTitle .todoNumbers{
+  margin-right: 6px;
+}
+
+.NImportant{
+  color:red;
+}
+
+
 .container h1{
   font-size: 16px;
-  border-bottom: 1px solid #ddd;
-  padding: 16px 0;
 }
 
 .container ul{
+  flex-direction: column;
   padding: 0;
   list-style: none;
+  
 }
 
 .container li{
   line-height: 1.5;
+}
+
+.container li .notImportant{
+  display: none;
+}
+
+.container li .important{
+  color: red;
+  display: inline-block;
+  margin-right: 4px;
 }
 
 .container input[type="checkbox"]{

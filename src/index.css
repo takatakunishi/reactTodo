@@ -20,3 +20,21 @@ code {
 .todolists{
   background-color: rgba(255,255,255,0.2);
 }
+
+.tcontainerOut{
+  text-align: center;
+  padding-top: 15px;
+}
+
+.timeContainer{
+  display: inline-block;
+  text-align: center;
+  font-size: 30px;
+  border: 2px solid white;
+  border-radius: 5px;
+  box-shadow: 5px 5px 2px rgba(255,255,255,0.2);
+}
+
+#RealtimeClockArea2{
+  display: inline-block;
+}
